@@ -1,11 +1,21 @@
 import './App.css';
-import MainPage from './pages/MainPage/MainPage';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from './Routes';
+import NavBarComponent from './components/NavBarComponent/NavBarComponent';
+import UserContextProvider from './context/userContext/userContext';
+import FooterComponent from './components/FooterComponent/FooterComponent';
 
 function App() {
   return (
-    <div className="App">
-        <MainPage />
-    </div>
+    <UserContextProvider>
+      <Router>
+        <div className="App">
+            <NavBarComponent />
+            <Routes />
+            <FooterComponent />
+        </div>
+      </Router>
+    </UserContextProvider>
   );
 }
 

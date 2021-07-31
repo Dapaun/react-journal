@@ -1,0 +1,105 @@
+.container {
+    margin: 0 auto;
+    display: flex;
+}
+.leftContainer {
+    max-width: 40%;
+    margin-left: 10%;
+}
+.firstParagraph {
+    font-size: 20px;
+    display: inline-block;
+    position: relative;
+}
+.firstParagraph::before {
+    content: 'Time to log in and start writing!';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+
+}
+.firstParagraph:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+.formStyle {
+    text-align: left;
+    width: 170px;
+    margin: 0 auto;
+    margin-top: 30%;
+    margin-left: 15%;
+    font-size: 30px;
+}
+.formStyle .inputStyle {
+    border-radius: 5px;
+    font-size: 30px;
+    margin-top: 10px;
+}
+.formStyle .submitButton {
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 30px;
+    transition-property: background-color, color, width, border-radius;
+    transition-duration: 1s;
+    display:block;
+    width: 100px;
+}
+.formStyle .submitButton:hover {
+    background-color: rgb(135, 202, 135);
+    color: white;
+    border-radius: 50%;
+    width: 350px;
+}
+
+.diaryGifContainer {
+    overflow: hidden;
+}
+
+.diaryGif {
+    margin-top: 35px;
+    transition: transform .5s ease;
+}
+
+.diaryGif:hover {
+    transform: scale(1.5);
+}
+
+.sunGif {
+    width: 200px;
+    float: right;
+}
+
+.rightContainer {
+    width: 60%;
+    background-color: white;
+}
+
+label {
+    margin-bottom: 2px;
+    display: inline-block;
+    position: relative;
+}
+
+label::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+label:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { v4 as uuid } from 'uuid';
+import { format } from 'date-fns'
 import './MainPage.css';
 
 const MainPage = () => {
@@ -8,11 +9,11 @@ const MainPage = () => {
         e.preventDefault();
         const newEntry = {
             id: uuid(),
-            date: new Date(),
+            date: format(new Date(), 'yyyy-MM-dd hh:mm'),
             text: textValue,
         };
         // Will be sending newEndtry to the BE
-        localStorage.setItem('entry', textValue);
+        localStorage.setItem(textValue, textValue);
         setTextValue('');
     }
     const handleChangeText = (e: any) => {
@@ -30,7 +31,7 @@ const MainPage = () => {
                     value={textValue}
                     onChange={handleChangeText}
                 />
-                <br/>
+                <br />
                 <button type="submit">Submit</button>
             </form>
         </>
