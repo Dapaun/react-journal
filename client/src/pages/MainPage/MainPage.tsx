@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { v4 as uuid } from 'uuid';
 import { format } from 'date-fns'
 import './MainPage.css';
+import { UserContext } from "../../context/userContext/userContext";
+import { useHistory } from "react-router";
 
 const MainPage = () => {
+    const { isAuthenticated } = useContext(UserContext);
+    const history = useHistory();
     const [textValue, setTextValue] = React.useState('');
     const handleSubmit = (e: any) => {
         e.preventDefault();
@@ -19,6 +23,11 @@ const MainPage = () => {
     const handleChangeText = (e: any) => {
         setTextValue(e.target.value);
     }
+
+    React.useEffect(() => {
+        if(!isAuthenticated) history.push('/login');
+    }, []);
+
     return (
         <>
             <h1>Time to talk about your day</h1>

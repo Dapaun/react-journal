@@ -1,0 +1,52 @@
+.formStyle {
+    text-align: left;
+    width: 170px;
+    margin: 0 auto;
+    margin-top: 25%;
+    margin-left: 15%;
+    font-size: 30px;
+}
+.formStyle .inputStyle {
+    border-radius: 5px;
+    font-size: 30px;
+    margin-top: 10px;
+}
+.formStyle .submitButton {
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 30px;
+    transition-property: background-color, color, width, border-radius;
+    transition-duration: 1s;
+    display:block;
+    width: 150px;
+}
+.formStyle .submitButton:hover {
+    background-color: rgb(135, 202, 135);
+    color: white;
+    border-radius: 50%;
+    width: 350px;
+}
+
+label {
+    margin-bottom: 2px;
+    display: inline-block;
+    position: relative;
+}
+
+label::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: black;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+label:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}

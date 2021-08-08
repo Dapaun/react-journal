@@ -1,6 +1,11 @@
 import React from "react";
+import './Form.css';
 
-const SignUpPage = () => {
+interface LoginFormProps {
+    handleLogin: (email: string, password: string) => void;
+}
+
+const LoginForm = (props: LoginFormProps) => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
 
@@ -10,19 +15,19 @@ const SignUpPage = () => {
     const handleOnChangePassword = (e: any) => {
         setPassword(e.target.value);
     }
-    const handleSubmitSignUpForm = (e: any) => {
+    const handleSubmitLoginForm = (e: any) => {
         e.preventDefault();
-        console.log('email: ', email);
-        console.log('password: ', password);
+        props.handleLogin(email, password);
     }
+
     return (
-        <div>
-            <form className="formStyle" onSubmit={handleSubmitSignUpForm}>
+        <form className="formStyle" onSubmit={handleSubmitLoginForm}>
                 <label>
                     Email
                 </label>
                 <br />
                 <input
+                    className="inputStyle"
                     type="text"
                     placeholder="Email"
                     name="email"
@@ -36,6 +41,7 @@ const SignUpPage = () => {
                 </label>
                 <br />
                 <input
+                    className="inputStyle"
                     type="password"
                     placeholder="Password"
                     name="password"
@@ -43,10 +49,9 @@ const SignUpPage = () => {
                     onChange={handleOnChangePassword}
                 />
                 <br />
-                <input type="submit" value="Sign up"/>
+                <input className="submitButton" type="submit" value="Login"/>
             </form>
-        </div>
-    );
-};
+    )
+}
 
-export default SignUpPage;
+export default LoginForm;

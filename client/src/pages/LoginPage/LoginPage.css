@@ -28,34 +28,6 @@
     transform: scaleX(1);
     transform-origin: bottom left;
 }
-.formStyle {
-    text-align: left;
-    width: 170px;
-    margin: 0 auto;
-    margin-top: 30%;
-    margin-left: 15%;
-    font-size: 30px;
-}
-.formStyle .inputStyle {
-    border-radius: 5px;
-    font-size: 30px;
-    margin-top: 10px;
-}
-.formStyle .submitButton {
-    border-radius: 5px;
-    margin-top: 10px;
-    font-size: 30px;
-    transition-property: background-color, color, width, border-radius;
-    transition-duration: 1s;
-    display:block;
-    width: 100px;
-}
-.formStyle .submitButton:hover {
-    background-color: rgb(135, 202, 135);
-    color: white;
-    border-radius: 50%;
-    width: 350px;
-}
 
 .diaryGifContainer {
     overflow: hidden;
@@ -70,9 +42,47 @@
     transform: scale(1.5);
 }
 
-.sunGif {
+.sunnyMessage {
+    position: absolute;
+    top: 120px;
+    right: -190px;
+    transition: all 2s ease;
+}
+
+.sunnyMessageHover {
+    position: absolute;
+    right: 20%;
+    top: 120px;
+    transition: all 2s ease;
+}
+
+.sunGifBefore {
     width: 200px;
-    float: right;
+    position: absolute;
+    right: 0;
+}
+
+.sunGifAfter {
+    width: 200px;
+    position: absolute;
+    right: 40%;
+}
+
+
+.sunGifActive {
+    animation: moveSunGif 2s ease forwards;
+}
+
+.sunGifInactive {
+    animation: returnSunGif 2s ease forwards;
+}
+
+@keyframes moveSunGif {
+    100% {right: 40%;}
+}
+
+@keyframes returnSunGif {
+    100% {right: 0;}
 }
 
 .rightContainer {
@@ -80,13 +90,43 @@
     background-color: white;
 }
 
-label {
-    margin-bottom: 2px;
-    display: inline-block;
+.signUpParagraph {
+    font-size: 20px;
     position: relative;
+    float: left;
+    margin-left: 75px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+.signUpParagraph::before {
+    content: 'Click here to sign up!';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+
+}
+.signUpParagraph:hover::before {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+    text-decoration: underline;
 }
 
-label::before {
+.loginParagraph {
+    font-size: 20px;
+    position: relative;
+    float: left;
+    margin-left: 75px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.loginParagraph::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -99,7 +139,7 @@ label::before {
     transition: transform 0.25s ease-out;
 }
 
-label:hover::before {
+.loginParagraph:hover::before {
     transform: scaleX(1);
     transform-origin: bottom left;
 }

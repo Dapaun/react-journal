@@ -1,18 +1,47 @@
-import React from "react";
+import React, { useContext } from "react";
 import './LoginPage.css';
+import { UserContext } from "../../context/userContext/userContext";
+import LoginForm from "../../components/forms/LoginForm";
+import SignUpForm from "../../components/forms/SignUpForm";
 
 const LoginPage = () => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [firstName, setFirstName] = React.useState('');
+    const [lastName, setLastName] = React.useState('');
+    const [isCLicking, setIsClicking] = React.useState(false);
+    const [sunAnimations, setSunAnimations] = React.useState('sunGifBefore');
+    const [isFirstRender, setIsFirstRender] = React.useState(true);
+    const [shouldDisplayLogin, setShouldDisplayLogin] = React.useState(true);
 
-    const handleOnChangeEmail = (e: any) => {
-        setEmail(e.target.value);
+    const { isAuthenticated } = useContext(UserContext);
+
+    React.useEffect(() => {
+        if (!isFirstRender) {
+            isCLicking ? setSunAnimations('sunGifBefore sunGifActive') : setSunAnimations('sunGifAfter sunGifInactive');
+        } else {
+            setIsFirstRender(false);
+        }
+    }, [isCLicking]);
+
+    const handleSubmitLoginForm = (email: string, password: string) => {
+        setEmail(email);
+        setPassword(password);
+        console.log('email: ', email);
+        console.log('password: ', password);
     }
-    const handleOnChangePassword = (e: any) => {
-        setPassword(e.target.value);
-    }
-    const handleSubmitLoginForm = (e: any) => {
-        e.preventDefault();
+
+    const handleSubmitSignUpForm = (
+        firstName: string,
+        lastName: string,
+        email: string,
+        password: string) => {
+        setEmail(email);
+        setPassword(password);
+        setFirstName(firstName);
+        setLastName(lastName);
+        console.log('firstName: ', firstName);
+        console.log('lastName: ', lastName);
         console.log('email: ', email);
         console.log('password: ', password);
     }
@@ -28,38 +57,31 @@ const LoginPage = () => {
                 </div>
             </div>
             <div className="rightContainer">
-            <img className="sunGif" src=" https://media.giphy.com/media/mFSlq2cgOGCnp3jkdo/giphy.gif" alt="" />
+                <div>
+                    <img onClick={() => setIsClicking(!isCLicking)} className={sunAnimations} src="https://media.giphy.com/media/mFSlq2cgOGCnp3jkdo/giphy.gif" alt="" />
+                    <p className={isCLicking ? "sunnyMessageHover" : "sunnyMessage"}>Hope you had a sunny day</p>
+                </div>
+                {shouldDisplayLogin &&
+                    <>
+                        <LoginForm handleLogin={(email: string, password: string) => {
+                            handleSubmitLoginForm(email, password);
+                        }} />
+                        <a className="signUpParagraph" onClick={() => setShouldDisplayLogin(!shouldDisplayLogin)}>Don't have an account?</a>
+                    </>
+                }
+                {!shouldDisplayLogin &&
+                    <>
+                        <SignUpForm handleSignUp={(
+                            firstName: string,
+                            lastName: string,
+                            email: string,
+                            password: string) => {
+                            handleSubmitSignUpForm(firstName, lastName, email, password);
+                        }} />
+                        <a className="loginParagraph" onClick={() => setShouldDisplayLogin(!shouldDisplayLogin)}>Back to login!</a>
 
-            <form className="formStyle" onSubmit={handleSubmitLoginForm}>
-                <label>
-                    Email
-                </label>
-                <br />
-                <input
-                    className="inputStyle"
-                    type="text"
-                    placeholder="Email"
-                    name="email"
-                    value={email}
-                    onChange={handleOnChangeEmail}
-                />
- 
-                <br />
-                <label>
-                    Password
-                </label>
-                <br />
-                <input
-                    className="inputStyle"
-                    type="password"
-                    placeholder="Password"
-                    name="password"
-                    value={password}
-                    onChange={handleOnChangePassword}
-                />
-                <br />
-                <input className="submitButton" type="submit" value="Login"/>
-            </form>
+                    </>
+                }
             </div>
         </div>
     );
