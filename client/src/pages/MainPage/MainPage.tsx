@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import './MainPage.css';
 import { UserContext } from "../../context/userContext/userContext";
 import { useHistory } from "react-router";
+import CardComponent from "../../components/CardComponent/CardComponent";
 
 const MainPage = () => {
     const { isAuthenticated } = useContext(UserContext);
@@ -31,7 +32,9 @@ const MainPage = () => {
     return (
         <>
             <h1>Time to talk about your day</h1>
-            <form onSubmit={handleSubmit}>
+            <CardComponent backgroundImmage={'https://media.giphy.com/media/3ohhwiLhofr9l6zzkQ/giphy.gif'} cardTitle="Title" position={'left'}/>
+            <CardComponent backgroundImmage={'https://media.giphy.com/media/3ohhwiLhofr9l6zzkQ/giphy.gif'} cardTitle="Title" position={'right'}/>
+            {/* <form onSubmit={handleSubmit}>
                 <textarea
                     className="textBox"
                     id="textValue"
@@ -42,7 +45,7 @@ const MainPage = () => {
                 />
                 <br />
                 <button type="submit">Submit</button>
-            </form>
+            </form> */}
         </>
     );
 };

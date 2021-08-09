@@ -1,0 +1,28 @@
+.cardContainer {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -45%);
+  }
+  
+.cardImage {
+opacity: 1;
+transition: .5s ease;
+}
+  
+.cardContainer:hover .cardImage {
+opacity: 0.3;
+}
+
+.cardContainer:hover .cardTitle {
+opacity: 1;
+transform: translateY(50%);
+}
+
+.cardTitle {
+font-size: 32px;
+position: absolute;
+opacity: 0;
+top: 30%;
+left: 40%;
+transition: .2s;
+}
