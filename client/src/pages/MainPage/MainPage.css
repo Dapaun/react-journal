@@ -3,3 +3,36 @@
     height: 55vh;
     border-radius: 5px;
 }
+
+.diaryEntryFormStart {
+    position: relative;
+    animation: animateFromTopToMiddle 1s ease forwards;
+}
+
+@keyframes animateFromTopToMiddle {
+    from {
+      top: -300px;
+      opacity: 0;
+    }
+    to {
+      top: 5%;
+      opacity: 1;
+    }
+}
+
+.diaryEntryFormEnd {
+    position: relative;
+    animation: animateFromMiddleToBottom 1s ease forwards;
+}
+
+@keyframes animateFromMiddleToBottom {
+    from {
+      top: 5%;
+      opacity: 1;
+    }
+    to {
+      top: 10%;
+      opacity: 0;
+      display: none;
+    }
+}

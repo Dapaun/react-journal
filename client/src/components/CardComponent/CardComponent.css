@@ -2,20 +2,26 @@
     position: absolute;
     top: 50%;
     transform: translate(-50%, -45%);
+    width: 350px;
+    cursor: pointer;
   }
   
 .cardImage {
 opacity: 1;
 transition: .5s ease;
+transform: scale(0.8);
+border-radius: 50%;
 }
   
 .cardContainer:hover .cardImage {
 opacity: 0.3;
+transform: scale(1);
 }
 
 .cardContainer:hover .cardTitle {
 opacity: 1;
 transform: translateY(50%);
+transform: translateX(50%);
 }
 
 .cardTitle {
@@ -23,6 +29,5 @@ font-size: 32px;
 position: absolute;
 opacity: 0;
 top: 30%;
-left: 40%;
 transition: .2s;
 }

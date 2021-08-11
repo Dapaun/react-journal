@@ -5,10 +5,11 @@ interface CardComponentProps {
     backgroundImmage: string;
     cardTitle: string;
     position: string;
+    handleClick?: any;
 }
 
 const CardComponent = (props: CardComponentProps) => {
-    const { backgroundImmage, cardTitle, position } = props;
+    const { backgroundImmage, cardTitle, position, handleClick } = props;
     const [horizontalPoSition, setHorizontalPosition] = React.useState('');
 
     React.useEffect(() => {
@@ -20,7 +21,7 @@ const CardComponent = (props: CardComponentProps) => {
     }, []);
     
     return (
-        <div className="cardContainer" style={{left: horizontalPoSition}}>
+        <div onClick={handleClick} className="cardContainer" style={{left: horizontalPoSition}}>
             <p className="cardTitle">{cardTitle}</p>
             <img className="cardImage" src={backgroundImmage} />
         </div>

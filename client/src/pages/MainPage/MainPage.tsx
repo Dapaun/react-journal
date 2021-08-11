@@ -10,6 +10,8 @@ const MainPage = () => {
     const { isAuthenticated } = useContext(UserContext);
     const history = useHistory();
     const [textValue, setTextValue] = React.useState('');
+    const [displayDiaryTextBox, setDisplayTextBox] = React.useState(false);
+    const [diaryEntryClasName, setDiaryEntryClassName] = React.useState('diaryEntryFormStart');
     const handleSubmit = (e: any) => {
         e.preventDefault();
         const newEntry = {
@@ -20,9 +22,32 @@ const MainPage = () => {
         // Will be sending newEndtry to the BE
         localStorage.setItem(textValue, textValue);
         setTextValue('');
+        setDiaryEntryClassName('diaryEntryFormEnd');
+        setTimeout(function(){
+            setDisplayTextBox(false);
+            setDiaryEntryClassName('diaryEntryFormStart');
+        }, 1000);
     }
+
     const handleChangeText = (e: any) => {
         setTextValue(e.target.value);
+    }
+
+    const handleBackClick = (e: any) => {
+        e.preventDefault();
+        setTextValue('');
+        setDiaryEntryClassName('diaryEntryFormEnd');
+        setTimeout(function(){
+            setDisplayTextBox(false);
+            setDiaryEntryClassName('diaryEntryFormStart');
+        }, 1000);
+    }
+
+    const handleAddNewEntryClick = () => {
+        setDisplayTextBox(!displayDiaryTextBox);
+    }
+    const handleViewRecordClick = () => {
+        console.log('Clicked on view recors');
     }
 
     React.useEffect(() => {
@@ -32,20 +57,37 @@ const MainPage = () => {
     return (
         <>
             <h1>Time to talk about your day</h1>
-            <CardComponent backgroundImmage={'https://media.giphy.com/media/3ohhwiLhofr9l6zzkQ/giphy.gif'} cardTitle="Title" position={'left'}/>
-            <CardComponent backgroundImmage={'https://media.giphy.com/media/3ohhwiLhofr9l6zzkQ/giphy.gif'} cardTitle="Title" position={'right'}/>
-            {/* <form onSubmit={handleSubmit}>
-                <textarea
-                    className="textBox"
-                    id="textValue"
-                    name="textValue"
-                    placeholder="Start typing..."
-                    value={textValue}
-                    onChange={handleChangeText}
-                />
-                <br />
-                <button type="submit">Submit</button>
-            </form> */}
+            {!displayDiaryTextBox &&
+                <>
+                    <CardComponent 
+                        handleClick={handleViewRecordClick}
+                        backgroundImmage={'https://media.giphy.com/media/DPH2d2WQsvTVEDVa2p/giphy.gif'}
+                        cardTitle="See previous entries"
+                        position={'left'}
+                    />
+                    <CardComponent
+                        handleClick={handleAddNewEntryClick}
+                        backgroundImmage={'https://media.giphy.com/media/3oKIPaGG4PDQgQDFZe/giphy.gif'}
+                        cardTitle="Talk about today"
+                        position={'right'}
+                    />
+                </>}
+            {displayDiaryTextBox &&
+                <form className={diaryEntryClasName} onSubmit={handleSubmit}>
+                    <textarea
+                        className="textBox"
+                        id="textValue"
+                        name="textValue"
+                        placeholder="Start typing..."
+                        value={textValue}
+                        onChange={handleChangeText}
+                    />
+                    <br />
+                    <button type="submit">Submit</button>
+                    <br />
+                    <button onClick={handleBackClick}>Back</button>
+                </form>
+            }       
         </>
     );
 };
