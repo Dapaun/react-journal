@@ -69,10 +69,29 @@ const LoginPage = () => {
         setPassword(password);
         setFirstName(firstName);
         setLastName(lastName);
-        console.log('firstName: ', firstName);
-        console.log('lastName: ', lastName);
-        console.log('email: ', email);
-        console.log('password: ', password);
+        const body = JSON.stringify({firstName, lastName, email, password});
+        axios.post(
+            '/signUp',
+            body,
+            {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            .then((response) => {
+                const user = {
+                    firstName: response.data.user.firstName,
+                    lastName: response.data.user.lastName,
+                    email: response.data.user.email,
+                };
+                console.log('Before change ',user);
+                // changeAuthenticationStatus(user);
+                setShouldDisplayLogin(!shouldDisplayLogin);
+            })
+            .catch((e) => {
+                //TODO SHARE ERROR 
+                console.log(e);
+            })
     }
 
     return (
