@@ -4,6 +4,7 @@ import { UserContext } from "../../context/userContext/userContext";
 import LoginForm from "../../components/forms/LoginForm";
 import SignUpForm from "../../components/forms/SignUpForm";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 const LoginPage = () => {
     const [email, setEmail] = React.useState('');
@@ -15,10 +16,10 @@ const LoginPage = () => {
     const [isFirstRender, setIsFirstRender] = React.useState(true);
     const [shouldDisplayLogin, setShouldDisplayLogin] = React.useState(true);
     const history = useHistory();
-    const { isAuthenticated , changeAuthenticationStatus } = useContext(UserContext);
+    const { isAuthenticated, changeAuthenticationStatus } = useContext(UserContext);
 
     React.useEffect(() => {
-        if(isAuthenticated) {
+        if (isAuthenticated) {
             history.push('/main');
         }
     }, [isAuthenticated]);
@@ -34,19 +35,29 @@ const LoginPage = () => {
     const handleSubmitLoginForm = (email: string, password: string) => {
         setEmail(email);
         setPassword(password);
-        //call with email and password
-        const user = {
-            firstName: 'John',
-            lastName: 'Doe',
-            email: 'john@doe.com',
-            password: 'password',
-        };
-        console.log('Isauth ', isAuthenticated);
+        const body = JSON.stringify({ email, password });
 
-        changeAuthenticationStatus(user);
-        console.log('email: ', email);
-        console.log('password: ', password);
-        console.log('Isauth ', isAuthenticated);
+        axios.post(
+            '/auth',
+            body,
+            {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            .then((response) => {
+                const user = {
+                    firstName: response.data.user.firstName,
+                    lastName: response.data.user.lastName,
+                    email: response.data.user.email,
+                };
+                console.log('Before change ',user);
+                changeAuthenticationStatus(user);
+            })
+            .catch((e) => {
+                //TODO SHARE ERROR 
+                console.log(e);
+            })
     }
 
     const handleSubmitSignUpForm = (
