@@ -1,0 +1,19 @@
+.backButtonToMainPage {
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 15px;
+    background-color: gray;
+    opacity: 0.5;
+    color: white;
+    transition: opacity 1s;
+    width: 150px;
+  }
+  
+.backButtonToMainPage:hover, .backButtonToMainPage:active {
+    opacity: 1;
+}
+
+.list {
+    list-style: none;
+    padding: 0;
+}

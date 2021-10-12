@@ -2,7 +2,7 @@ import {
     Switch,
     Route,
   } from 'react-router-dom';
-import DiaryEntryList from './pages/DiaryEntryList/DiaryEntryList';
+import DiaryEntryListPage from './pages/DiaryEntryListPage/DiaryEntryListPage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import MainPage from "./pages/MainPage/MainPage";
 
@@ -10,7 +10,7 @@ import MainPage from "./pages/MainPage/MainPage";
       return (
         <Switch>
             <Route exact path="/list">
-                <DiaryEntryList />
+                <DiaryEntryListPage />
             </Route>
             <Route exact path="/login">
                 <LoginPage />

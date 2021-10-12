@@ -47,7 +47,7 @@ const MainPage = () => {
         setDisplayTextBox(!displayDiaryTextBox);
     }
     const handleViewRecordClick = () => {
-        console.log('Clicked on view recors');
+        history.push('/list');
     }
 
     React.useEffect(() => {
@@ -83,9 +83,9 @@ const MainPage = () => {
                         onChange={handleChangeText}
                     />
                     <br />
-                    <button type="submit">Submit</button>
+                    <button className="submitButton" type="submit">Submit</button>
                     <br />
-                    <button onClick={handleBackClick}>Back</button>
+                    <button className="backButton" onClick={handleBackClick}>Back</button>
                 </form>
             }       
         </>
