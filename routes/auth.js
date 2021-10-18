@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const User = require('../models/User');
 
@@ -37,7 +38,26 @@ router.post('/', (req, res) => {
             } else {
                 return res.status(400).json({msg: 'Invalid Credentials'});
             }
-        })
+        });
+});
+
+router.post('/userId', (req, res) => {
+    const {
+        userId
+     } = req.body;
+     User.findById(mongoose.Types.ObjectId(userId))
+        .then(user => {
+            if(!user) return res.status(400).json({msg: "User not found"});
+            return res.status(200).json({
+                user: {
+                    id: user.id,
+                    firstName: user.first_name,
+                    lastName: user.last_name,
+                    email: user.email,
+                    registerDate: user.register_date
+                }
+            });
+        });
 });
 
 module.exports = router;

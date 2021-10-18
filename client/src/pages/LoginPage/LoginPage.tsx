@@ -47,11 +47,12 @@ const LoginPage = () => {
             })
             .then((response) => {
                 const user = {
+                    id: response.data.user.id,
                     firstName: response.data.user.firstName,
                     lastName: response.data.user.lastName,
                     email: response.data.user.email,
                 };
-                console.log('Before change ',user);
+                console.log('Before change ', user);
                 changeAuthenticationStatus(user);
             })
             .catch((e) => {

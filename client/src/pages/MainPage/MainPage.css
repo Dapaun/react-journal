@@ -66,3 +66,30 @@
 .backButton:hover, .backButton:active {
   opacity: 1;
 }
+
+.mainTitle {
+  margin: 0 auto;
+  margin-top: 35px;
+  position: relative;
+  width: 450px;
+  cursor: pointer;
+}
+
+.mainTitle::before {
+  content: ':)';
+  position: absolute;
+  background: black;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform 0.25s ease-out;
+}
+
+.mainTitle:hover:before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+
+}

@@ -5,6 +5,7 @@ const Schema = mongoose.Schema;
 //Create User Schema
 
 const UserSchema = new Schema({
+    _id: mongoose.SchemaTypes.ObjectId,
     first_name: {
         type: String,
         require: true

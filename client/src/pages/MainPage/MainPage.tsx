@@ -1,26 +1,48 @@
 import React, { useContext } from "react";
 import { v4 as uuid } from 'uuid';
-import { format } from 'date-fns'
 import './MainPage.css';
 import { UserContext } from "../../context/userContext/userContext";
 import { useHistory } from "react-router";
 import CardComponent from "../../components/CardComponent/CardComponent";
+import axios from "axios";
 
 const MainPage = () => {
-    const { isAuthenticated } = useContext(UserContext);
+    const { isAuthenticated, user } = useContext(UserContext);
     const history = useHistory();
     const [textValue, setTextValue] = React.useState('');
     const [displayDiaryTextBox, setDisplayTextBox] = React.useState(false);
     const [diaryEntryClasName, setDiaryEntryClassName] = React.useState('diaryEntryFormStart');
+    console.log('User ', user);
     const handleSubmit = (e: any) => {
         e.preventDefault();
         const newEntry = {
-            id: uuid(),
-            date: format(new Date(), 'yyyy-MM-dd hh:mm'),
+            userId: user.id,
             text: textValue,
         };
-        // Will be sending newEndtry to the BE
+        // Will be sending newEntry to the BE
         localStorage.setItem(textValue, textValue);
+
+        const body = JSON.stringify(newEntry);
+        axios.post(
+            '/entry',
+            body,
+            {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            .then((response) => {
+                const entry = {
+                    id: response.data.entry.id,
+                    text: response.data.entry.text,
+                    date: response.data.entry.date,
+                };
+                console.log('Here is the entry ', entry);
+            })
+            .catch((e) => {
+                //TODO SHARE ERROR 
+                console.log(e);
+            })
         setTextValue('');
         setDiaryEntryClassName('diaryEntryFormEnd');
         setTimeout(function(){
@@ -56,7 +78,7 @@ const MainPage = () => {
 
     return (
         <>
-            <h1>Time to talk about your day</h1>
+            <h1 className="mainTitle">Time to talk about your day</h1>
             {!displayDiaryTextBox &&
                 <>
                     <CardComponent 

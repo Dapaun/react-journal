@@ -4,6 +4,7 @@ const path = require('path');
 const config = require("config");
 const auth = require('./routes/auth');
 const signUp = require('./routes/signUp');
+const entry = require('./routes/entry');
 
 const app = express();
 
@@ -21,6 +22,7 @@ mongoose
 
 app.use('/auth', auth);
 app.use('/signUp', signUp);
+app.use('/entry', entry);
 
 const port = 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`));
