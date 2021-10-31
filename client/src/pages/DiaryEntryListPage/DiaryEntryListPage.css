@@ -8,6 +8,7 @@
     transition: opacity 1s;
     width: 150px;
     margin-bottom: 100px;
+    z-index: 99999;
   }
   
 .backButtonToMainPage:hover, .backButtonToMainPage:active {
@@ -19,7 +20,6 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
-    /* align-content: space-between; */
 }
 
 .listItem {
@@ -33,6 +33,35 @@
     justify-content: center;
     display: flex;
     align-items: center;
+    background-color: azure;
+    transition: background-color 1s;
+    flex-direction: column;
+}
+
+.listItem p {
+    display: inline-block;
+    transition: display 1s;
+}
+
+.listItem:hover p {
+    display: none;
+}
+
+.listItem:hover {
+    background-color: rgb(222, 222, 226);
+}
+
+.diaryEntryButton {
+    opacity: 0;
+    border-radius: 50%;
+    padding: 10px;
+    /* transition: opacity 1s; */
+}
+
+.listItem:hover .diaryEntryButton{
+    opacity: 1;
+    cursor: pointer;
+    z-index: 9999;
 }
 
 .backToTopButton {
@@ -50,4 +79,106 @@
 
 .backToTopButton:hover {
     opacity: 1;
+}
+
+.diaryEntryContainer {
+    position: relative;
+}
+
+.diaryEntryViewFromStart {
+    height: 420px;
+    width: 500px;
+    background-color: rgb(222, 222, 226);
+    z-index: 999999;
+    transform: translateX(-50%) translateY(15%);
+    left: 50%;
+    position: fixed;
+    border-radius: 10px;
+    animation: animateFromTopToMiddle 1s ease forwards;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes animateFromTopToMiddle {
+    from {
+        top: -300px;
+        opacity: 0;
+    }
+    to {
+        top: 500px;
+        opacity: 1;
+    }
+}
+
+.diaryEntryViewFromMiddle {
+    height: 420px;
+    width: 500px;
+    background-color: rgb(222, 222, 226);
+    z-index: 999;
+    transform: translateX(-50%) translateY(-85%);
+    left: 50%;
+    position: fixed;
+    border-radius: 10px;
+    animation: animateFromMiddle 3s ease forwards;
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes animateFromMiddle {
+    from {
+        top: 450px;
+        opacity: 1;
+    }
+    to {
+        top: 800px;
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.closeModalButtonContainer {
+    display: flex;
+    flex-direction: row-reverse;
+    margin: 10px 10px 10px;
+}
+
+.overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 2;
+}
+
+.content {
+    flex-grow: 1;
+}
+
+.deleteButton {
+    align-self: center;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    font-size: 15px;
+    background-color: rgb(211, 69, 69);
+    opacity: 0.5;
+    color: white;
+    transition: opacity 1s;
+    width: 150px;
+}
+
+.deleteButton:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.closeModalButton {
+    border-radius: 50%;
+    border: 0px;
+    background-color: #df6969;
+    color: white;
+    cursor: pointer;
 }

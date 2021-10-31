@@ -22,7 +22,7 @@
 
 .diaryEntryFormEnd {
     position: relative;
-    animation: animateFromMiddleToBottom 1s ease forwards;
+    animation: animateFromMiddleToBottom 1.5s ease forwards;
 }
 
 @keyframes animateFromMiddleToBottom {
@@ -33,7 +33,7 @@
     to {
       top: 10%;
       opacity: 0;
-      display: none;
+      visibility: hidden;
     }
 }
 
@@ -61,6 +61,7 @@
   color: white;
   transition: opacity 1s;
   width: 150px;
+  z-index: 9999;
 }
 
 .backButton:hover, .backButton:active {
@@ -91,5 +92,4 @@
 .mainTitle:hover:before {
   transform: scaleX(1);
   transform-origin: bottom left;
-
 }

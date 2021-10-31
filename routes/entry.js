@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require('mongoose');
 
 const Entry = require('../models/Entry');
 
@@ -26,6 +27,15 @@ router.post('/entrylist', (req, res) => {
         .then(entries => {
             return res.status(200).json({
                 entries
+            });
+        });
+});
+
+router.post('/:id', (req, res) => {
+    Entry.findById(mongoose.Types.ObjectId(req.params.id))
+        .then(entry => {
+            return res.status(200).json({
+                entry
             });
         });
 });
