@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../context/userContext/userContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,7 +15,7 @@ const DiaryEntryListPage = () => {
     };
     const [showButton, setShowButton] = React.useState(false);
     const { isAuthenticated, user } = useContext(UserContext);
-    const [entryList, setEntryList] = React.useState();
+    const [entryList, setEntryList] = React.useState() as any;
     const [entryElement, setEntryElement] = React.useState() as any;
     const [entryAnimation, setEntryAnimation] = React.useState('');
     const dateOptions: any = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -77,6 +77,27 @@ const DiaryEntryListPage = () => {
                 //TODO SHARE ERROR 
                 console.log(e);
             })
+    };
+
+    const handleDelete = () => {
+        axios.delete(
+            `/entry/${entryElement._id}`,
+            {
+                headers: {
+                    'Content-type': 'application/json'
+                }
+            })
+            .then(() => {
+                const newEntryList = entryList && entryList.filter (
+                    (entry: any) => entry._id !== entryElement._id );
+                setEntryList(newEntryList);
+                setEntryAnimation('diaryEntryViewFromMiddle');
+                setEntryElement(''); 
+            })
+            .catch((e) => {
+                //TODO SHARE ERROR 
+                console.log(e);
+            })
     }
 
     return (
@@ -114,7 +135,7 @@ const DiaryEntryListPage = () => {
                 </div>
                 <p>{entryElement && 'Post from ' + new Date(entryElement.post_date).toLocaleDateString("en-US", dateOptions)}</p>
                 <p className="content">{entryElement && entryElement.text}</p>
-                {entryElement && <button className="deleteButton">Delete Post</button> }
+                {entryElement && <button className="deleteButton" onClick={handleDelete}>Delete Post</button> }
             </div>
         </div>
 

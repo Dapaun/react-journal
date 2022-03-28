@@ -40,4 +40,15 @@ router.post('/:id', (req, res) => {
         });
 });
 
+router.delete('/:id', (req, res) => {
+    Entry.remove({ _id: req.params.id }, function(err) {
+        if (!err) {
+            return res.status(200).json('Succesflully deleted');
+        }
+        else {
+            return res.status(400).json('Error when deleteing deleted');
+        }
+    });
+});
+
 module.exports = router;
