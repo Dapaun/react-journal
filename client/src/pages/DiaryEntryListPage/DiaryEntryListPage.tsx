@@ -128,11 +128,11 @@ const DiaryEntryListPage = () => {
                 Go back
             </button>
             <div className={entryAnimation}>
-                <div className="closeModalButtonContainer">
+               {entryElement && <div className="closeModalButtonContainer">
                    <button className="closeModalButton" onClick={() => { setEntryElement(''); setEntryAnimation('diaryEntryViewFromMiddle') }}>
                        X
                     </button>
-                </div>
+                </div> }
                 <p>{entryElement && 'Post from ' + new Date(entryElement.post_date).toLocaleDateString("en-US", dateOptions)}</p>
                 <p className="content">{entryElement && entryElement.text}</p>
                 {entryElement && <button className="deleteButton" onClick={handleDelete}>Delete Post</button> }

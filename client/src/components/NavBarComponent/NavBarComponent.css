@@ -3,3 +3,56 @@
     height: 50px;
     background-color: #333;
 }
+
+.userInfo {
+    color: white;    
+    position: fixed;
+    right: 10px;
+    cursor: pointer;
+}
+
+.logoutBox {
+    width: 150px;
+    height: 150px;
+    background-color: white;
+    border-radius: 7%;
+    position: fixed;
+    right: 10px;
+    top: 40px;
+    opacity: 75%;
+    z-index: 9999;
+    border: 0;
+}
+
+.logoutOptions {
+    list-style-type: none;
+    padding: 0;
+}
+
+.logoutOption {
+    border-bottom: 1px solid lightgray;
+    padding-left: 10p;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+.logoutOption:last-child {
+    border: 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid white;
+    position: fixed;
+    right: 15px;
+    opacity: 75%;
+    top: 36px;
+  }

@@ -7,8 +7,10 @@
     color: white;
     transition: opacity 1s;
     width: 150px;
-    margin-bottom: 100px;
     z-index: 99999;
+    position: fixed;
+    bottom: 80px;
+    transform: translateX(-50%);
   }
   
 .backButtonToMainPage:hover, .backButtonToMainPage:active {

@@ -12,7 +12,7 @@ const MainPage = () => {
     const [textValue, setTextValue] = React.useState('');
     const [displayDiaryTextBox, setDisplayTextBox] = React.useState(false);
     const [diaryEntryClasName, setDiaryEntryClassName] = React.useState('diaryEntryFormStart');
-    console.log('User ', user);
+
     const handleSubmit = (e: any) => {
         e.preventDefault();
         const newEntry = {
